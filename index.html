@@ -265,17 +265,17 @@
             font-size: 0.85rem;
             margin-bottom: 8px;
             font-weight: 500;
-            letter-spacing: 1px;
-        }
+                            <div class="form-group">
+                    <label for="reserved-seats">Number of Seats Reserved For You</label>
+                    <select id="reserved-seats" class="form-control" required>
+                        <option value="1">1 Seat</option>
+                        <option value="2">2 Seats</option>
+                        <option value="3">3 Seats</option>
+                        <option value="4">4 Seats</option>
+                        <option value="5">5 Seats</option>
+                    </select>
+                </div>
 
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #DDD;
-            border-radius: 6px;
-            font-family: inherit;
-            outline: none;
-            transition: border-color 0.3s;
         }
 
         .form-control:focus {
