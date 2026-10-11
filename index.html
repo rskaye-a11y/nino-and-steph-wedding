@@ -548,8 +548,7 @@
         </p>
     </section>
 
-    <!-- RSVP Section -->
-<section id="rsvp" class="rsvp-section" style="padding: 60px 20px; max-width: 600px; margin: 0 auto; text-align: center;">
+    <section id="rsvp" class="rsvp-section" style="padding: 60px 20px; max-width: 600px; margin: 0 auto; text-align: center;">
     <h2 class="section-title" style="font-family: 'Alex Brush', cursive; font-size: 3.5rem; margin-bottom: 10px; color: #94A293;">RSVP Portal</h2>
     <p style="font-size: 1.1rem; margin-bottom: 5px; color: #2F3E46;">The favor of your response is highly requested.</p>
     <p style="font-size: 1rem; font-weight: 600; margin-bottom: 30px; color: #A39384;">Kindly RSVP on or before December 15, 2026</p>
@@ -596,38 +595,6 @@
 </section>
 
 <script>
-    // Automatically hides or disables the seat dropdown helper if the guest declines
-    function handleAttendanceChange() {
-        const attendanceStatus = document.getElementById('attendance').value;
-        const seatDropdown = document.getElementById('seatsReserved');
-        const seatGroupElement = document.getElementById('seatGroup');
-        
-        if (attendanceStatus === 'no') {
-            seatDropdown.value = "";
-            seatDropdown.disabled = true;
-            seatDropdown.removeAttribute('required');
-            seatGroupElement.style.opacity = "0.5";
-        } else {
-            seatDropdown.disabled = false;
-            seatDropdown.setAttribute('required', 'required');
-            seatGroupElement.style.opacity = "1";
-        }
-    }
-
-    // Handles form data submission layout
-    function handleWeddingRsvp(event) {
-        event.preventDefault();
-        const guestName = document.getElementById('fullName').value;
-        const acceptStatus = document.getElementById('attendance').value;
-        const allocatedSeats = document.getElementById('seatsReserved').value;
-        
-        if (acceptStatus === 'yes') {
-            alert(`Thank you, ${guestName}! Your RSVP choice has been successfully saved for ${allocatedSeats} seat(s).`);
-        } else {
-            alert(`Thank you for informing us, ${guestName}. We will miss celebrating with you!`);
-        }
-    }
-</script>
         // Automatic Dynamic Accurate Target Live Countdown Clock
         const targetWeddingDate = new Date("Jan 9, 2027 00:00:00").getTime();
 
