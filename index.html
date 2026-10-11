@@ -548,46 +548,81 @@
         </p>
     </section>
 
-    <section class="reveal">
-        <div class="section-title-decoration">
-            <h2>RSVP Portal</h2>
-        </div>
-        <p>The favor of your response is highly requested.</p>
-        <p style="font-weight: 600; color: var(--sage-green); margin-top: 5px;">Kindly RSVP on or before December 15, 2026</p>
-
-        <div class="rsvp-card">
-            <form onsubmit="alert('Thank you for responding!'); return false;">
-                <div class="form-group">
-                    <label for="guest-name">Full Name</label>
-                    <input type="text" id="guest-name" class="form-control" placeholder="Please enter your complete name" required>
-                </div>
-                <div class="form-group">
-                    <label for="attendance">Will you attend?</label>
-                    <select id="attendance" class="form-control" required>
-                        <option value="" disabled selected>Select an option</option>
-                        <option value="yes">Joyfully Accept</option>
-                        <option value="no">Regretfully Decline</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="reserved-seats">Number of Seats Reserved For You</label>
-                    <select id="reserved-seats" class="form-control" required>
-                        <option value="1">1 Seat</option>
-                        <option value="2">2 Seats</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="submit-btn">Submit Response</button>
-            </form>
-
-            <div class="policy-note">
-                <strong>No Plus One Policy:</strong> We kindly ask for your understanding into our policy of not bringing uninvited guest. Your cooperation in this matter is greatly appreciated as it ensures that every guest has a comfortable and enjoyable experience.
+    <section id="rsvp-section" style="padding: 60px 20px; max-width: 600px; margin: 0 auto; font-family: 'Montserrat', sans-serif;">
+    <h2 style="font-family: 'Alex Brush', cursive; font-size: 3.5rem; text-align: center; margin-bottom: 10px; color: #94A293;">RSVP Portal</h2>
+    <p style="text-align: center; font-size: 1rem; margin-bottom: 5px; color: #2F3E46;">The favor of your response is highly requested.</p>
+    <p style="text-align: center; font-size: 0.95rem; font-weight: 600; margin-bottom: 30px; color: #A39384;">Kindly RSVP on or before December 15, 2026</p>
+    
+    <div style="background-color: #ffffff; padding: 40px 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-top: 4px solid #ACBECB;">
+        <form id="weddingRsvpForm" onsubmit="handleFormSubmit(event)">
+            <!-- Full Name -->
+            <div style="margin-bottom: 25px;">
+                <label for="fullName" style="display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: #2F3E46; text-align: left;">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required style="width: 100%; padding: 14px; border: 1px solid #E2E8F0; border-radius: 8px; font-size: 1rem; background-color: #FAFBFD; box-sizing: border-box;">
             </div>
-        </div>
-    </section>
 
-    <script>
+            <!-- Attendance Select -->
+            <div style="margin-bottom: 25px;">
+                <label for="attendance" style="display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: #2F3E46; text-align: left;">Will you attend?</label>
+                <select id="attendance" name="attendance" required onchange="toggleSeatSelection()" style="width: 100%; padding: 14px; border: 1px solid #E2E8F0; border-radius: 8px; font-size: 1rem; background-color: #FAFBFD; box-sizing: border-box;">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="yes">Joyfully Accept</option>
+                    <option value="no">Regretfully Decline</option>
+                </select>
+            </div>
+
+            <!-- Custom Seat Count Dropdown Locked Max to 3 -->
+            <div id="seatSelectionGroup" style="margin-bottom: 25px;">
+                <label for="seatsReserved" style="display: block; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; color: #2F3E46; text-align: left;">Number of Seats Reserved For You</label>
+                <select id="seatsReserved" name="seatsReserved" required style="width: 100%; padding: 14px; border: 1px solid #E2E8F0; border-radius: 8px; font-size: 1rem; background-color: #FAFBFD; box-sizing: border-box;">
+                    <option value="" disabled selected>Select number of seats</option>
+                    <option value="1">1 Seat</option>
+                    <option value="2">2 Seats</option>
+                    <option value="3">3 Seats</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" style="width: 100%; padding: 16px; border: none; border-radius: 8px; background-color: #94A293; color: #ffffff; font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: background-color 0.3s ease;">Submit Response</button>
+
+            <!-- Plus One Policy Footer -->
+            <p style="font-size: 0.85rem; color: #C53030; margin-top: 25px; text-align: center; font-weight: 500; line-height: 1.6;">
+                <strong>No Plus One Policy:</strong> We kindly ask for your understanding into our policy of not bringing uninvited guest. Your cooperation in this matter is greatly appreciated as it ensures that every guest has a comfortable and enjoyable experience.
+            </p>
+        </form>
+    </div>
+</section>
+
+<script>
+    // Disables seat dropdown dynamically if a guest declines attendance
+    function toggleSeatSelection() {
+        const attendance = document.getElementById('attendance').value;
+        const seatDropdown = document.getElementById('seatsReserved');
+        
+        if (attendance === 'no') {
+            seatDropdown.value = "";
+            seatDropdown.disabled = true;
+            seatDropdown.removeAttribute('required');
+        } else {
+            seatDropdown.disabled = false;
+            seatDropdown.setAttribute('required', 'required');
+        }
+    }
+
+    // Handles simulation alert validation
+    function handleFormSubmit(event) {
+        event.preventDefault();
+        const name = document.getElementById('fullName').value;
+        const attendance = document.getElementById('attendance').value;
+        const seats = document.getElementById('seatsReserved').value;
+        
+        if (attendance === 'yes') {
+            alert(`Thank you, ${name}! Your RSVP has been recorded for ${seats} seat(s).`);
+        } else {
+            alert(`Thank you for letting us know, ${name}. We will miss you!`);
+        }
+    }
+</script>
         // Automatic Dynamic Accurate Target Live Countdown Clock
         const targetWeddingDate = new Date("Jan 9, 2027 00:00:00").getTime();
 
